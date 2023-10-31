@@ -27,7 +27,7 @@ def main():
  
 @app.route('/test')
 def test():
-    return 'NEW PAGE'
+    return render_template('test.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
