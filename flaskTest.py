@@ -1,6 +1,7 @@
 import sys
 import subprocess
 
+
 try:
     # 없는 모듈 import시 에러 발생
     from flask import Flask, render_template
