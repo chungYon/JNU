@@ -104,14 +104,15 @@
         });
     });
 
-    var width = 500,
-        height = 400;
+    var width = window.innerWidth,
+        height = window.innerHeight,
+        distance = 100;
 
     var force = d3.layout.force()
         .nodes(nodes)
         .links(links)
         .size([width, height])
-        .linkDistance(40)
+        .linkDistance(distance)
         .charge(-200)
         .on("tick", tick)
         .start();
@@ -139,11 +140,17 @@
     .enter().append("path")
         .attr("class", function(d) { return "link " + d.type; })
         .attr("marker-end", function(d) { return "url(#" + d.type + ")"; });
+    
+    var path_text = svg.append("g").selectAll("text")
+        .data(force.links())
+    .enter().append("text")
+    .text(function(d) { console.log(d.type); return d.type; });
+        
 
     var circle = svg.append("g").selectAll("circle")
         .data(force.nodes())
     .enter().append("circle")
-        .attr("r", function(d) { return 5 + d.started; })
+        .attr("r", function(d) { return d.started  + 5; })
         .call(force.drag);
 
     var text = svg.append("g").selectAll("text")
@@ -152,10 +159,12 @@
         .attr("x", function(d) { return 8 + d.started; })
         .attr("y", ".31em")
         .text(function(d) { return d.name; });
+    
 
     // Use elliptical arc path segments to doubly-encode directionality.
     function tick() {
         path.attr("d", linkArc);
+        path_text.attr("transform", transformPathText);
         circle.attr("transform", transform);
         text.attr("transform", transform);
     }
@@ -172,6 +181,9 @@
         return "translate(" + d.x + "," + d.y + ")";
     }
 
+    function transformPathText(d) {
+        return "translate(" + (d.source.x + d.target.x) / 2 + "," + (d.source.y + d.target.y) / 2 + ")";
+    }
     </script>
 </body>
 </html>
