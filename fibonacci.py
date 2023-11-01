@@ -1,18 +1,22 @@
 
+stack = []
 
-def fibo(n, parent_id, child_id):
+def fibo(n, id):
     
-    print("{}->{}".format(parent_id, child_id))
+    stack.insert(0, id)
+    print(stack)
     
     if(n < 1):
-        return [0, child_id]
+        return [0, stack.pop()]
     if(n == 1):
-        return [1, child_id]
+        return [1, stack.pop()]
     
-    result1 = fibo(n - 1, child_id, child_id + 1)
-    print("{}->{}".format(result1[1], child_id))
-    result2 = fibo(n - 2, child_id, result1[1] + 1)
-    print("{}->{}".format(result2[1], child_id))
-    return [result1[0] + result2[0], result2[1]]
+    result1 = fibo(n - 1, id + 1)
+    result2 = fibo(n - 2, result1[1] + 1)
+    
+    print(stack)
+    
+    return [result1[0] + result2[0], stack.pop()]
 
-print(fibo(5, 0, 1))
+
+print(fibo(3, 1))
