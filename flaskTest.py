@@ -12,6 +12,29 @@ except:
     subprocess.check_call([sys.executable,'-m', 'pip', 'install', '--upgrade', 'Flask'])
     # 다시 import
     from flask import Flask, render_template
+    
+try:
+    import pyrebase
+except:
+    # pip 모듈 업그레이드
+    subprocess.check_call([sys.executable,'-m', 'pip', 'install', '--upgrade', 'pip'])
+    # 에러 발생한 모듈 설치
+    subprocess.check_call([sys.executable,'-m', 'pip', 'install', '--upgrade', 'pyrebase'])
+    # 다시 import
+    import pyrebase
+
+firebaseConfig = {
+  "apiKey": "AIzaSyBM3snbMYD3bZMX8QJjP1i7aIgWVDwaYBw",
+  "authDomain": "jnu-server.firebaseapp.com",
+  "projectId": "jnu-server",
+  "storageBucket": "jnu-server.appspot.com",
+  "messagingSenderId": "782346831123",
+  "appId": "1:782346831123:web:c4488ea561ae50bda906e6",
+  "measurementId": "G-LY5D9LX4CV"
+}
+
+firebase = pyrebase.initialize_app(firebaseConfig)
+db = firebase.database()
 
 app = Flask(__name__)
 
