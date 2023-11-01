@@ -1,22 +1,39 @@
 
 stack = []
-
-def fibo(n, id):
-    
-    stack.insert(0, id)
-    print(stack)
-    
-    if(n < 1):
-        return [0, stack.pop()]
-    if(n == 1):
-        return [1, stack.pop()]
-    
-    result1 = fibo(n - 1, id + 1)
-    result2 = fibo(n - 2, result1[1] + 1)
-    
-    print(stack)
-    
-    return [result1[0] + result2[0], stack.pop()]
+id = 0
 
 
-print(fibo(3, 1))
+def fibo(n):
+    global id
+    
+    id += 1
+    stack.append(id)
+
+    #print(stack)
+
+    if(len(stack) > 1):
+        print("{}->{}".format(stack[-2], stack[-1]))
+
+    if(n <= 1):
+        if(len(stack) > 1):
+            print("{}->{}".format(stack.pop(), stack[-1]))
+
+        if(n < 1):
+            return 0
+        if(n == 1):
+            return 1
+
+            
+    else:
+        result1 = fibo(n - 1)
+        result2 = fibo(n - 2)
+
+        #print(stack)
+        
+        if(len(stack) > 1):
+            print("{}->{}".format(stack.pop(), stack[-1]))
+
+        return result1 + result2
+
+
+print(fibo(20))
