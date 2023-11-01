@@ -23,19 +23,6 @@ except:
     # 다시 import
     import pyrebase
 
-firebaseConfig = {
-  "apiKey": "AIzaSyBM3snbMYD3bZMX8QJjP1i7aIgWVDwaYBw",
-  "authDomain": "jnu-server.firebaseapp.com",
-  "projectId": "jnu-server",
-  "storageBucket": "jnu-server.appspot.com",
-  "messagingSenderId": "782346831123",
-  "appId": "1:782346831123:web:c4488ea561ae50bda906e6",
-  "measurementId": "G-LY5D9LX4CV"
-}
-
-firebase = pyrebase.initialize_app(firebaseConfig)
-db = firebase.database()
-
 app = Flask(__name__)
 
 @app.route('/')

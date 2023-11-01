@@ -9486,7 +9486,7 @@
       return d.getMilliseconds();
     } ], [ ":%S", function(d) {
       return d.getSeconds();
-    } ], [ "%I:%M", function(d) \{
+    } ], [ "%I:%M", function(d) {
       return d.getMinutes();
     } ], [ "%I %p", function(d) {
       return d.getHours();
