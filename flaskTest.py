@@ -1,6 +1,6 @@
 import sys
 import subprocess
-
+import pyrebase
 
 try:
     # 없는 모듈 import시 에러 발생
@@ -14,6 +14,24 @@ except:
     from flask import Flask, render_template
 
 app = Flask(__name__)
+
+firebaseConfig = {
+  "apiKey": "AIzaSyBM3snbMYD3bZMX8QJjP1i7aIgWVDwaYBw",
+  "authDomain": "jnu-server.firebaseapp.com",
+  "projectId": "jnu-server",
+  "storageBucket": "jnu-server.appspot.com",
+  "messagingSenderId": "782346831123",
+  "appId": "1:782346831123:web:fd6c5bdac657962da906e6",
+  "measurementId": "G-MC92J5JBP4",
+  "databaseURL" : "https://jnu-server-default-rtdb.firebaseio.com/"
+}
+
+firebase = pyrebase.initialize_app(firebaseConfig)
+
+db = firebase.database()
+
+app = Flask(__name__)
+
 
 @app.route('/')
 def index():
