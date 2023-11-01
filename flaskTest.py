@@ -52,5 +52,9 @@ def main():
 def test():
     return render_template('test.html')
 
+@app.route('/howtouse')
+def explain():
+    return "this is to introduce how to use this site"
+
 if __name__ == '__main__':
     app.run(debug=True)
