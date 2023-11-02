@@ -36,4 +36,4 @@ def fibo(n):
         return result1 + result2
 
 
-print(fibo(20))
+print(fibo(3))
