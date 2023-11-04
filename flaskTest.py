@@ -12,17 +12,7 @@ except:
     # 에러 발생한 모듈 설치
     subprocess.check_call([sys.executable,'-m', 'pip', 'install', '--upgrade', 'Flask'])
     # 다시 import
-    from flask import Flask, render_template
-    
-try:
-    import pyrebase
-except:
-    # pip 모듈 업그레이드
-    subprocess.check_call([sys.executable,'-m', 'pip', 'install', '--upgrade', 'pip'])
-    # 에러 발생한 모듈 설치
-    subprocess.check_call([sys.executable,'-m', 'pip', 'install', '--upgrade', 'pyrebase'])
-    # 다시 import
-    import pyrebase
+    from flask import Flask, make_response, redirect, render_template, request, session, url_for
 
 app = Flask(__name__)
 
