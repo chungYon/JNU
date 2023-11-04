@@ -1,5 +1,6 @@
 import sys
 import subprocess
+import fibonacci
 
 
 try:
@@ -27,7 +28,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("index.html", links=fibonacci.links)
 
 @app.route('/main1', methods=['GET', 'POST'])
 def main():
