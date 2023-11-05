@@ -20,14 +20,12 @@ app = Flask(__name__)
 def index():
     return render_template("index.html", links=fibonacci.links)
 
-@app.route('/main1', methods=['GET', 'POST'])
-def main():
-    if request.method == 'POST':
-        return redirect(url_for('test'))
+@app.route('/main1')
+def main1():
     return render_template('main1.html')
 
 @app.route('/main')
-def test():
+def main():
     return render_template('main.html')
  
 @app.route('/test')
