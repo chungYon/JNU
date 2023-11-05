@@ -34,6 +34,10 @@ def main():
     if request.method == 'POST':
         return redirect(url_for('test'))
     return render_template('main1.html')
+
+@app.route('/main')
+def test():
+    return render_template('main.html')
  
 @app.route('/test')
 def test():
