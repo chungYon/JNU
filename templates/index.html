@@ -93,18 +93,24 @@
 
     nodes.forEach(function(d) {
         d.started = 0;
+        if(d.name == '1')
+        {
+            d.fixed=true;
+        }
 
         links.forEach(function(d1) {
             if (d == d1.source)
             {
-                console.log("d : ", d)
-                console.log("d1 : ", d1)
+                
                 d.started++
             }
         });
     });
 
     var width = window.innerWidth,
+
+
+    
         height = window.innerHeight,
         distance = 100;
 
@@ -113,7 +119,7 @@
         .links(links)
         .size([width, height])
         .linkDistance(distance)
-        .charge(-200)
+        .charge(-100)
         .on("tick", tick)
         .start();
 
