@@ -20,18 +20,14 @@ body{
 h2{
     font-family: 'GmarketSansMedium';
 }
-start {
+h3{
+  font-family: 'GmarketSansMedium';
+}
+a {
     text-decoration-line: none;
-  }
-  start:link {
     color : white;
   }
-  start:visited {
-    color : white;
-  }
-  start:hover {
-    color : white;
-  }
-  start:active {
-    color : white;
-  }
+ a:hover{
+  color : yellow;
+ }
+ 

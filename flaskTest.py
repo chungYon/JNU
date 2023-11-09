@@ -32,6 +32,10 @@ def main():
 def test():
     return render_template('test.html')
 
+@app.route('/select')
+def select():
+    return render_template('select.html')
+
 @app.route('/howtouse')
 def explain():
     return "this is to introduce how to use this site"

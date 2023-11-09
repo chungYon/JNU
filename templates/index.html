@@ -38,7 +38,8 @@
     </style>
 </head>
 <body>
-    <script src="https://d3js.org/d3.v3.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='node_modules/quagga/dist/quagga.js') }}"></script>
     <script>
         // http://blog.thomsonreuters.com/index.php/mobile-patent-suits-graphic-of-the-day/
     // var links = [
@@ -72,6 +73,8 @@
     //     {source: "Nokia", target: "Qualcomm", type: "suit"}
     // ];
     var links = {{links | tojson}};
+
+    var links_hi = d3.hei
 
     var nodeset = {};
 

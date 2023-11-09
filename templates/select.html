@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href=" {{ url_for('static', filename='css/select.css') }}">
+   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>재귀함수 선택</title>
+    <style>
+      
+       .bt1{
+        border:none;
+        background-color:rgba(0,0,0,0);
+       }
+        img { display:block; margin:auto;}
+            body{
+            text-align: center;
+            background-image:url('{{url_for('static', filename='image/main_background.png')}}');
+            }
+            .wrap {
+                display: grid;
+              grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+     .item {
+                flex: 1;
+     }
+  
+    </style>
+</head>
+<all>
+
+<body>
+    <div class="wrap">
+        <div class="item">
+            <button type="button" class="bt1" onclick="1">
+                <img src="{{ url_for('static', filename='image/button1.png') }}">
+            </button>
+            <button type ="button" class="bt1" onclick="2">
+                <img src="{{ url_for('static', filename='image/button2.png') }}">
+            </button>
+                <button type ="button" class="bt1" onclick="3">
+                <img src="{{ url_for('static', filename='image/button3.png') }}">
+            </button>
+             </div>
+
+        <div class="item">
+
+        </div>
+        <div class="item">
+
+        </div>
+</div>
+        <!--<img src="{{ url_for('static', filename='image/main_background.png') }}">-->
+        
+    
+
+    </body>
+</all>
+</html>
