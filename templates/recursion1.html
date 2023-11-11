@@ -1,16 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <title>My test page</title>
+  <meta charset="UTF-8">
+  <title>Recursion Example</title>
 </head>
 <body>
   <h1>피보나치 함수</h1>
   <h1>Your N is <span id="inputValue"></span></h1>
 
   <script>
-    // textarea에서 입력받은 값을 가져와서 span에 표시
-    var inputValue = "{{ input_value }}";  // Flask에서 전달받은 input_value
+    // URL에서 파라미터 추출
+    function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    // URL에서 'n' 파라미터 값을 가져와서 span에 표시
+    var inputValue = getParameterByName('n');
+    console.log("URL Parameter 'n' value:", inputValue);
     document.getElementById("inputValue").innerText = inputValue;
   </script>
 </body>

@@ -1,11 +1,29 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>My test page</title>
-  </head>
-  <body>
-    <h1>이분탐색</h1>
-    <h1>your N is {{ input_value }}</h1>
-  </body>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Recursion Example</title>
+</head>
+<body>
+  <h1>이분탐색</h1>
+  <h1>Your N is <span id="inputValue"></span></h1>
+
+  <script>
+    // URL에서 파라미터 추출
+    function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    // URL에서 'n' 파라미터 값을 가져와서 span에 표시
+    var inputValue = getParameterByName('n');
+    console.log("URL Parameter 'n' value:", inputValue);
+    document.getElementById("inputValue").innerText = inputValue;
+  </script>
+</body>
 </html>
