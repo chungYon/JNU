@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>My test page</title>
+</head>
+<body>
+  <h1>피보나치 함수</h1>
+  <h1>Your N is <span id="inputValue"></span></h1>
+
+  <script>
+    // textarea에서 입력받은 값을 가져와서 span에 표시
+    var inputValue = "{{ input_value }}";  // Flask에서 전달받은 input_value
+    document.getElementById("inputValue").innerText = inputValue;
+  </script>
+</body>
+</html>
