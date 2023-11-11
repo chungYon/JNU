@@ -32,7 +32,7 @@ def main():
 def test():
     return render_template('test.html')
 
-@app.route('/select')
+@app.route('/select', methods=['GET', 'POST'])
 def select():
     return render_template('select.html')
 
