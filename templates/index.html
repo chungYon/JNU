@@ -23,13 +23,13 @@
             stroke-dasharray: 0,2 1;
         } */
 
-        circle {
+        .node circle {
             fill: #ccc;
             stroke: #333;
             stroke-width: 1.5px;
         }
 
-        text {
+        .node text {
             font: 10px sans-serif;
             pointer-events: none;
             text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
@@ -38,8 +38,8 @@
     </style>
 </head>
 <body>
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='node_modules/quagga/dist/quagga.js') }}"></script>
+    <script src="http://d3js.org/d3.v3.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='node_modules/d3-hierarchy/dist/d3-hierarchy.js') }}"></script>
     <script>
         // http://blog.thomsonreuters.com/index.php/mobile-patent-suits-graphic-of-the-day/
     // var links = [
@@ -74,124 +74,198 @@
     // ];
     var links = {{links | tojson}};
 
-    var links_hi = d3.hei
+    console.log(links);
 
-    var nodeset = {};
+    var stratify = d3.stratify().id(d => d.target).parentId(d => d.source);
+    var links_hi = stratify(links);
+    console.log(links_hi);
+
+    // var nodeset = {};
 
     // Compute the distinct nodes from the links.
-    links.forEach(function(link) {
-        link.source = nodeset[link.source] || (nodeset[link.source] = {name: link.source});
-        link.target = nodeset[link.target] || (nodeset[link.target] = {name: link.target});
-    });
+    // links.forEach(function(link) {
+    //     link.source = nodeset[link.source] || (nodeset[link.source] = {name: link.source});
+    //     link.target = nodeset[link.target] || (nodeset[link.target] = {name: link.target});
+    // });
 
-    links.forEach(function(d) {
-        d.straight = 1;
-        links.forEach(function(d1) {
-            if ((d.source == d1.target) && (d1.source == d.target))
-                d.straight = 0;
-        });
-    });
+    // links.forEach(function(d) {
+    //     d.straight = 1;
+    //     links.forEach(function(d1) {
+    //         if ((d.source == d1.target) && (d1.source == d.target))
+    //             d.straight = 0;
+    //     });
+    // });
 
-    nodes = d3.values(nodeset);
+    // nodes = d3.values(nodeset);
 
-    nodes.forEach(function(d) {
-        d.started = 0;
-        if(d.name == '1')
-        {
-            d.fixed=true;
-        }
+    // nodes.forEach(function(d) {
+    //     d.started = 0;
+    //     if(d.name == '1')
+    //     {
+    //         d.fixed=true;
+    //     }
 
-        links.forEach(function(d1) {
-            if (d == d1.source)
-            {
+    //     links.forEach(function(d1) {
+    //         if (d == d1.source)
+    //         {
                 
-                d.started++
-            }
-        });
-    });
+    //             d.started++
+    //         }
+    //     });
+    // });
 
-    var width = window.innerWidth,
+    // var width = window.innerWidth,
 
 
     
-        height = window.innerHeight,
-        distance = 100;
+    //     height = window.innerHeight,
+    //     distance = 100;
 
-    var force = d3.layout.force()
-        .nodes(nodes)
-        .links(links)
-        .size([width, height])
-        .linkDistance(distance)
-        .charge(-100)
-        .on("tick", tick)
-        .start();
+    // var force = d3.layout.force()
+    //     .nodes(nodes)
+    //     .links(links)
+    //     .size([width, height])
+    //     .linkDistance(distance)
+    //     .charge(-100)
+    //     .on("tick", tick)
+    //     .start();
 
-    var svg = d3.select("body").append("svg")
-        .attr("width", width)
-        .attr("height", height);
+    // var svg = d3.select("body").append("svg")
+    //     .attr("width", width)
+    //     .attr("height", height);
 
-    // Per-type markers, as they don't inherit styles.
-    svg.append("defs").selectAll("marker")
-        .data(["call", "return"])
-    .enter().append("marker")
-        .attr("id", function(d) { return d; })
-        .attr("viewBox", "0 -5 10 10")
-        .attr("refX", 15)
-        .attr("refY", 0)
-        .attr("markerWidth", 9)
-        .attr("markerHeight", 5)
-        .attr("orient", "auto")
-    .append("path")
-        .attr("d", "M0,-5L10,0L0,5");
+    // // Per-type markers, as they don't inherit styles.
+    // svg.append("defs").selectAll("marker")
+    //     .data(["call", "return"])
+    // .enter().append("marker")
+    //     .attr("id", function(d) { return d; })
+    //     .attr("viewBox", "0 -5 10 10")
+    //     .attr("refX", 15)
+    //     .attr("refY", 0)
+    //     .attr("markerWidth", 9)
+    //     .attr("markerHeight", 5)
+    //     .attr("orient", "auto")
+    // .append("path")
+    //     .attr("d", "M0,-5L10,0L0,5");
 
-    var path = svg.append("g").selectAll("path")
-        .data(force.links())
-    .enter().append("path")
-        .attr("class", function(d) { return "link " + d.type; })
-        .attr("marker-end", function(d) { return "url(#" + d.type + ")"; });
+    // var path = svg.append("g").selectAll("path")
+    //     .data(force.links())
+    // .enter().append("path")
+    //     .attr("class", function(d) { return "link " + d.type; })
+    //     .attr("marker-end", function(d) { return "url(#" + d.type + ")"; });
     
-    var path_text = svg.append("g").selectAll("text")
-        .data(force.links())
-    .enter().append("text")
-    .text(function(d) { console.log(d.type); return d.type + d.value; });
+    // var path_text = svg.append("g").selectAll("text")
+    //     .data(force.links())
+    // .enter().append("text")
+    // .text(function(d) { console.log(d.type); return d.type + d.value; });
         
 
-    var circle = svg.append("g").selectAll("circle")
-        .data(force.nodes())
-    .enter().append("circle")
-        .attr("r", function(d) { return d.started  + 5; })
-        .call(force.drag);
+    // var circle = svg.append("g").selectAll("circle")
+    //     .data(force.nodes())
+    // .enter().append("circle")
+    //     .attr("r", function(d) { return d.started  + 5; })
+    //     .call(force.drag);
 
-    var text = svg.append("g").selectAll("text")
-        .data(force.nodes())
-    .enter().append("text")
-        .attr("x", function(d) { return 8 + d.started; })
-        .attr("y", ".31em")
-        .text(function(d) { return d.name; });
+    // var text = svg.append("g").selectAll("text")
+    //     .data(force.nodes())
+    // .enter().append("text")
+    //     .attr("x", function(d) { return 8 + d.started; })
+    //     .attr("y", ".31em")
+    //     .text(function(d) { return d.name; });
     
 
-    // Use elliptical arc path segments to doubly-encode directionality.
-    function tick() {
-        path.attr("d", linkArc);
-        path_text.attr("transform", transformPathText);
-        circle.attr("transform", transform);
-        text.attr("transform", transform);
-    }
+    // // Use elliptical arc path segments to doubly-encode directionality.
+    // function tick() {
+    //     path.attr("d", linkArc);
+    //     path_text.attr("transform", transformPathText);
+    //     circle.attr("transform", transform);
+    //     text.attr("transform", transform);
+    // }
 
-    function linkArc(d) {
-        var dx = d.target.x - d.source.x,
-            dy = d.target.y - d.source.y,
-            dr = (d.straight == 0)?Math.sqrt(dx * dx + dy * dy):0;
-        return "M" + d.source.x + "," + d.source.y +
-            "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
-    }
+    // function linkArc(d) {
+    //     var dx = d.target.x - d.source.x,
+    //         dy = d.target.y - d.source.y,
+    //         dr = (d.straight == 0)?Math.sqrt(dx * dx + dy * dy):0;
+    //     return "M" + d.source.x + "," + d.source.y +
+    //         "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
+    // }
 
-    function transform(d) {
-        return "translate(" + d.x + "," + d.y + ")";
-    }
+    // function transform(d) {
+    //     return "translate(" + d.x + "," + d.y + ")";
+    // }
 
-    function transformPathText(d) {
-        return "translate(" + (d.source.x + d.target.x) / 2 + "," + (d.source.y + d.target.y) / 2 + ")";
+    // function transformPathText(d) {
+    //     return "translate(" + (d.source.x + d.target.x) / 2 + "," + (d.source.y + d.target.y) / 2 + ")";
+    // }
+
+    var margin = {top: 20, right: 120, bottom: 20, left: 120},
+        width = window.innerWidth - margin.right - margin.left,
+        height = window.innerHeight - margin.top - margin.bottom;
+    
+    var i = 0;
+
+    var tree = d3.layout.tree()
+        .size([height, width]);
+
+    var diagonal = d3.svg.diagonal()
+        .projection(function(d) { return [d.x, d.y]; });
+
+    var svg = d3.select("body").append("svg")
+        .attr("width", width + margin.right + margin.left)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    root = links_hi;
+
+    console.log(root)
+        
+    update(root);
+
+    function update(source) {
+
+        // Compute the new tree layout.
+        var nodes = tree.nodes(root).reverse(),
+        links = tree.links(nodes);
+        console.log(nodes);
+
+        // Normalize for fixed-depth.
+        nodes.forEach(function(d) { d.y = d.depth * 180; });
+
+        console.log(nodes);
+
+        // Declare the nodesâ€¦
+        var node = svg.selectAll("g.node")
+        .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+        // Enter the nodes.
+        var nodeEnter = node.enter().append("g")
+        .attr("class", "node")
+        .attr("transform", function(d) { 
+            return "translate(" + d.x + "," + d.y + ")"; });
+
+        nodeEnter.append("circle")
+        .attr("r", 10)
+        .style("fill", "#fff");
+
+        nodeEnter.append("text")
+        .attr("x", function(d) { 
+            return d.children || d._children ? -13 : 13; })
+        .attr("dy", ".35em")
+        .attr("text-anchor", function(d) { 
+            return d.children || d._children ? "end" : "start"; })
+        .text(function(d) { return d.data.value; })
+        .style("fill-opacity", 1);
+
+        // Declare the linksâ€¦
+        var link = svg.selectAll("path.link")
+        .data(links, function(d) { return d.target.id; });
+
+        // Enter the links.
+        link.enter().insert("path", "g")
+        .attr("class", "link")
+        .attr("d", diagonal);
+
     }
     </script>
 </body>

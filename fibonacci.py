@@ -1,6 +1,8 @@
 
 stack = []
 links = []
+
+links.append({"source" : "", "target" : 1, "type" : "call", "value" : ""})
 id = 0
 
 def fibo(n):
@@ -16,17 +18,17 @@ def fibo(n):
     if(n < 1):
         if(len(stack) > 1):
             print("{}->{}".format(stack[-1], stack[-2]))
-            links.append({"source" : stack[-1], "target" : stack[-2], "type" : "return"})
+            # links.append({"source" : stack[-1], "target" : stack[-2], "type" : "return"})
             print("return value : {}".format(0))
-            links[-1]["value"] = 0
+            #links[-1]["value"] = 0
             stack.pop()
         return 0
     if(n == 1):
         if(len(stack) > 1):
             print("{}->{}".format(stack[-1], stack[-2]))
-            links.append({"source" : stack[-1], "target" : stack[-2], "type" : "return"})
+            # links.append({"source" : stack[-1], "target" : stack[-2], "type" : "return"})
             print("return value : {}".format(0))
-            links[-1]["value"] = 1
+            #links[-1]["value"] = 1
             stack.pop()
         return 1
 
@@ -37,12 +39,12 @@ def fibo(n):
         
         if(len(stack) > 1):
             print("{}->{}".format(stack[-1], stack[-2]))
-            links.append({"source" : stack[-1], "target" : stack[-2], "type" : "return"})
-            links[-1]["value"] = result1 + result2
+            # links.append({"source" : stack[-1], "target" : stack[-2], "type" : "return"})
+            for(link, i in enumerate(links)):
+                if(link["target"] == links[i][])
+
+            links[-1]["value"] = "{} + {} = {}".format(result1, result2, result1 + result2)
             stack.pop()
         return result1 + result2
 
-
-print(fibo(5))
-for i in links:
-    print(i)
+fibo(5)
