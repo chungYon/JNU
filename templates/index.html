@@ -29,7 +29,19 @@
             stroke-width: 1.5px;
         }
 
+        .node circle {
+            fill: #ccc;
+            stroke: #333;
+            stroke-width: 1.5px;
+        }
+
         .node text {
+            font: 10px sans-serif;
+            pointer-events: none;
+            text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+        }
+
+        .link_text {
             font: 10px sans-serif;
             pointer-events: none;
             text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
@@ -38,165 +50,15 @@
     </style>
 </head>
 <body>
-    <script src="http://d3js.org/d3.v3.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='node_modules/d3/dist/d3.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='node_modules/d3-hierarchy/dist/d3-hierarchy.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='node_modules/d3-zoom/dist/d3-zoom.js') }}"></script>
     <script>
-        // http://blog.thomsonreuters.com/index.php/mobile-patent-suits-graphic-of-the-day/
-    // var links = [
-    //     {source: "Microsoft", target: "Amazon", type: "licensing"},
-    //     {source: "Microsoft", target: "HTC", type: "licensing"},
-    //     {source: "Samsung", target: "Apple", type: "suit"},
-    //     {source: "Motorola", target: "Apple", type: "suit"},
-    //     {source: "Nokia", target: "Apple", type: "resolved"},
-    //     {source: "HTC", target: "Apple", type: "suit"},
-    //     {source: "Kodak", target: "Apple", type: "suit"},
-    //     {source: "Microsoft", target: "Barnes & Noble", type: "suit"},
-    //     {source: "Microsoft", target: "Foxconn", type: "suit"},
-    //     {source: "Oracle", target: "Google", type: "suit"},
-    //     {source: "Apple", target: "HTC", type: "suit"},
-    //     {source: "Microsoft", target: "Inventec", type: "suit"},
-    //     {source: "Samsung", target: "Kodak", type: "resolved"},
-    //     {source: "LG", target: "Kodak", type: "resolved"},
-    //     {source: "RIM", target: "Kodak", type: "suit"},
-    //     {source: "Sony", target: "LG", type: "suit"},
-    //     {source: "Kodak", target: "LG", type: "resolved"},
-    //     {source: "Apple", target: "Motorola", type: "suit"},
-    //     {source: "Apple", target: "Nokia", type: "resolved"},
-    //     {source: "Qualcomm", target: "Nokia", type: "resolved"},
-    //     {source: "Microsoft", target: "Motorola", type: "suit"},
-    //     {source: "Motorola", target: "Microsoft", type: "suit"},
-    //     {source: "Huawei", target: "ZTE", type: "suit"},
-    //     {source: "Ericsson", target: "ZTE", type: "suit"},
-    //     {source: "Kodak", target: "Samsung", type: "resolved"},
-    //     {source: "Apple", target: "Samsung", type: "suit"},
-    //     {source: "Kodak", target: "RIM", type: "suit"},
-    //     {source: "Nokia", target: "Qualcomm", type: "suit"}
-    // ];
-    var links = {{links | tojson}};
 
-    console.log(links);
+    var links = {{links | tojson}};
 
     var stratify = d3.stratify().id(d => d.target).parentId(d => d.source);
     var links_hi = stratify(links);
-    console.log(links_hi);
-
-    // var nodeset = {};
-
-    // Compute the distinct nodes from the links.
-    // links.forEach(function(link) {
-    //     link.source = nodeset[link.source] || (nodeset[link.source] = {name: link.source});
-    //     link.target = nodeset[link.target] || (nodeset[link.target] = {name: link.target});
-    // });
-
-    // links.forEach(function(d) {
-    //     d.straight = 1;
-    //     links.forEach(function(d1) {
-    //         if ((d.source == d1.target) && (d1.source == d.target))
-    //             d.straight = 0;
-    //     });
-    // });
-
-    // nodes = d3.values(nodeset);
-
-    // nodes.forEach(function(d) {
-    //     d.started = 0;
-    //     if(d.name == '1')
-    //     {
-    //         d.fixed=true;
-    //     }
-
-    //     links.forEach(function(d1) {
-    //         if (d == d1.source)
-    //         {
-                
-    //             d.started++
-    //         }
-    //     });
-    // });
-
-    // var width = window.innerWidth,
-
-
-    
-    //     height = window.innerHeight,
-    //     distance = 100;
-
-    // var force = d3.layout.force()
-    //     .nodes(nodes)
-    //     .links(links)
-    //     .size([width, height])
-    //     .linkDistance(distance)
-    //     .charge(-100)
-    //     .on("tick", tick)
-    //     .start();
-
-    // var svg = d3.select("body").append("svg")
-    //     .attr("width", width)
-    //     .attr("height", height);
-
-    // // Per-type markers, as they don't inherit styles.
-    // svg.append("defs").selectAll("marker")
-    //     .data(["call", "return"])
-    // .enter().append("marker")
-    //     .attr("id", function(d) { return d; })
-    //     .attr("viewBox", "0 -5 10 10")
-    //     .attr("refX", 15)
-    //     .attr("refY", 0)
-    //     .attr("markerWidth", 9)
-    //     .attr("markerHeight", 5)
-    //     .attr("orient", "auto")
-    // .append("path")
-    //     .attr("d", "M0,-5L10,0L0,5");
-
-    // var path = svg.append("g").selectAll("path")
-    //     .data(force.links())
-    // .enter().append("path")
-    //     .attr("class", function(d) { return "link " + d.type; })
-    //     .attr("marker-end", function(d) { return "url(#" + d.type + ")"; });
-    
-    // var path_text = svg.append("g").selectAll("text")
-    //     .data(force.links())
-    // .enter().append("text")
-    // .text(function(d) { console.log(d.type); return d.type + d.value; });
-        
-
-    // var circle = svg.append("g").selectAll("circle")
-    //     .data(force.nodes())
-    // .enter().append("circle")
-    //     .attr("r", function(d) { return d.started  + 5; })
-    //     .call(force.drag);
-
-    // var text = svg.append("g").selectAll("text")
-    //     .data(force.nodes())
-    // .enter().append("text")
-    //     .attr("x", function(d) { return 8 + d.started; })
-    //     .attr("y", ".31em")
-    //     .text(function(d) { return d.name; });
-    
-
-    // // Use elliptical arc path segments to doubly-encode directionality.
-    // function tick() {
-    //     path.attr("d", linkArc);
-    //     path_text.attr("transform", transformPathText);
-    //     circle.attr("transform", transform);
-    //     text.attr("transform", transform);
-    // }
-
-    // function linkArc(d) {
-    //     var dx = d.target.x - d.source.x,
-    //         dy = d.target.y - d.source.y,
-    //         dr = (d.straight == 0)?Math.sqrt(dx * dx + dy * dy):0;
-    //     return "M" + d.source.x + "," + d.source.y +
-    //         "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
-    // }
-
-    // function transform(d) {
-    //     return "translate(" + d.x + "," + d.y + ")";
-    // }
-
-    // function transformPathText(d) {
-    //     return "translate(" + (d.source.x + d.target.x) / 2 + "," + (d.source.y + d.target.y) / 2 + ")";
-    // }
 
     var margin = {top: 20, right: 120, bottom: 20, left: 120},
         width = window.innerWidth - margin.right - margin.left,
@@ -213,12 +75,13 @@
     var svg = d3.select("body").append("svg")
         .attr("width", width + margin.right + margin.left)
         .attr("height", height + margin.top + margin.bottom)
+        .call(d3.zoom().on("zoom", function () {
+            svg.attr("transform", d3.zoomTransform(this))
+        }))
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     root = links_hi;
-
-    console.log(root)
         
     update(root);
 
@@ -227,12 +90,9 @@
         // Compute the new tree layout.
         var nodes = tree.nodes(root).reverse(),
         links = tree.links(nodes);
-        console.log(nodes);
 
         // Normalize for fixed-depth.
         nodes.forEach(function(d) { d.y = d.depth * 180; });
-
-        console.log(nodes);
 
         // Declare the nodesâ€¦
         var node = svg.selectAll("g.node")
@@ -250,22 +110,30 @@
 
         nodeEnter.append("text")
         .attr("x", function(d) { 
+            console.log(d.children);
             return d.children || d._children ? -13 : 13; })
         .attr("dy", ".35em")
         .attr("text-anchor", function(d) { 
             return d.children || d._children ? "end" : "start"; })
-        .text(function(d) { return d.data.value; })
+        .text(function(d) { return "n: " + d.data.value; })
         .style("fill-opacity", 1);
 
         // Declare the linksâ€¦
         var link = svg.selectAll("path.link")
-        .data(links, function(d) { return d.target.id; });
+        .data(links, function(d) { return d.target.id; }).enter();
+
+        link.append("text")
+        .attr("class", "link_text")
+        .attr("transform", function(d){return "translate(" + (d.source.x + d.target.x) / 2 + "," + (d.source.y + d.target.y) / 2 + ")";})
+        .attr("dy", ".35em")
+        .attr("text-anchor", "end")
+        .text(function(d) { return d.target.data.return_text; })
+        .style("fill-opacity", 1);
 
         // Enter the links.
-        link.enter().insert("path", "g")
+        link.insert("path", "g")
         .attr("class", "link")
-        .attr("d", diagonal);
-
+        .attr("d", diagonal)
     }
     </script>
 </body>
