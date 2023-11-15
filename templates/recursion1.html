@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Recursion Example</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
   <h1>피보나치 함수</h1>
   <h1>Your N is <span id="inputValue"></span></h1>
 
   <script>
+    
     // URL에서 파라미터 추출
     function getParameterByName(name, url) {
       if (!url) url = window.location.href;
@@ -24,6 +26,17 @@
     var inputValue = getParameterByName('n');
     console.log("URL Parameter 'n' value:", inputValue);
     document.getElementById("inputValue").innerText = inputValue;
+    $.ajax({ 
+      url: '/process', 
+      type: 'POST', 
+      data: { 'data': inputValue }, 
+      success: function(response) { 
+          document.getElementById('output').innerHTML = response; 
+      }, 
+      error: function(error) { 
+          console.log(error); 
+      } 
+  }); 
   </script>
 </body>
 </html>
