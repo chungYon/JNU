@@ -1,6 +1,7 @@
 import sys
 import subprocess
 import fibonacci
+import factorial
 
 
 try:
@@ -17,20 +18,8 @@ except:
 app = Flask(__name__)
 
 @app.route('/')
-def index():
-    return "this is empty homepage"
-
-@app.route('/main1')
-def main1():
-    return render_template('main1.html')
-
-@app.route('/main')
 def main():
     return render_template('main.html')
- 
-@app.route('/test')
-def test():
-    return render_template('test.html')
 
 @app.route('/select', methods=['GET', 'POST'])
 def select():
@@ -50,10 +39,10 @@ def recursion1():
 @app.route('/select/recursion2',  methods=['GET', 'POST'])
 def recursion2():
     n_value = request.args.get('n', type=int)
-    print("Received input_value:", n_value)
-    return render_template('recursion2.html')
-
     
+    factorial.links.clear()
+    factorial.factorial(n_value)
+    return render_template('index.html', links=factorial.links)
 
 @app.route('/select/recursion3',  methods=['GET', 'POST'])
 def recursion3():
