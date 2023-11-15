@@ -40,6 +40,8 @@
             padding: 20px;
             border-radius: 10px;
             text-align: left;
+            max-height: 300px;
+            overflow: auto; 
         }
 
         textarea {
@@ -48,12 +50,14 @@
             border: none;
             resize: none;
             margin-bottom: 10px; /* 여백 추가 */
+    
         }
 
         .input-container {
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top: 10px;
         }
 
         .submitButton {
@@ -63,6 +67,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 16px; /* 필요에 따라 글꼴 크기 조정 */
         }
 
         h1 {
@@ -97,7 +102,17 @@
                     "&nbsp&nbsp&nbsp return n * JNU2(n-1)";
             } else if (buttonNumber === 3) {
                 move = 3;
-                displayText = "show me the code<br>choose recursion";
+                displayText ="def JNU3(n, goal, start=0, end=None):<br>"+
+                "&nbsp&nbsp&nbsp&nbspif end==None:<br>&nbsp&nbsp&nbspend = len(goal) - 1"+
+                "<br>&nbsp&nbsp&nbsp&nbspif start > end:"+
+                "<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspreturn None"+
+                "<br>&nbsp&nbsp&nbsp&nbspmid = (start + end) // 2"+
+                "<br>&nbsp&nbsp&nbsp&nbspif goal[mid] == n:<br>"+
+                "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspreturn mid<br>"+
+                "&nbsp&nbsp&nbsp&nbspif n < goal[mid]:<br>"+
+                "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspreturn JNU3(n, goal, start, mid-1)<br>"+
+                "&nbsp&nbsp&nbsp&nbspelse:<br>"+
+                "&nbsp&nbsp&nbsp&nbspreturn JNU3(n, goal, mid + 1, end)" ;
     
                 btn1.style.display = 'block';
             }
