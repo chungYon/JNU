@@ -40,8 +40,6 @@ def fibo(n):
         if(len(stack) > 1):
             print("{}->{}".format(stack[-1], stack[-2]))
             # links.append({"source" : stack[-1], "target" : stack[-2], "type" : "return"})
-            for(link, i in enumerate(links)):
-                if(link["target"] == links[i][])
 
             links[-1]["value"] = "{} + {} = {}".format(result1, result2, result1 + result2)
             stack.pop()
