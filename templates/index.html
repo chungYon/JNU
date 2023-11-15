@@ -33,15 +33,18 @@
             fill: #ccc;
             stroke: #333;
             stroke-width: 1.5px;
+            
         }
 
         .node text {
+            position: absolute;
             font: 10px sans-serif;
             pointer-events: none;
             text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
         }
 
         .link_text {
+            position: absolute;
             font: 10px sans-serif;
             pointer-events: none;
             text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
@@ -102,38 +105,33 @@
         var nodeEnter = node.enter().append("g")
         .attr("class", "node")
         .attr("transform", function(d) { 
-            return "translate(" + d.x + "," + d.y + ")"; });
+            return "translate(" + d.x + "," + d.y + ")"; 
+        });
 
         nodeEnter.append("circle")
-        .attr("r", 10)
+        .attr("r", 30)
         .style("fill", "#fff");
 
         nodeEnter.append("text")
-        .attr("x", function(d) { 
-            console.log(d.children);
-            return d.children || d._children ? -13 : 13; })
-        .attr("dy", ".35em")
-        .attr("text-anchor", function(d) { 
-            return d.children || d._children ? "end" : "start"; })
-        .text(function(d) { return "n: " + d.data.value; })
+        .attr("dy", "-1em")
+        .attr("text-anchor", "end")
+        .text(function(d) { return "n : " + d.data.value;})
+        .style("fill-opacity", 1);
+
+        nodeEnter.append("text")
+        .attr("dy", "1em")
+        .attr("text-anchor", "middle")
+        .text(function(d) { return d.data.return_text;})
         .style("fill-opacity", 1);
 
         // Declare the linksâ€¦
         var link = svg.selectAll("path.link")
         .data(links, function(d) { return d.target.id; }).enter();
 
-        link.append("text")
-        .attr("class", "link_text")
-        .attr("transform", function(d){return "translate(" + (d.source.x + d.target.x) / 2 + "," + (d.source.y + d.target.y) / 2 + ")";})
-        .attr("dy", ".35em")
-        .attr("text-anchor", "end")
-        .text(function(d) { return d.target.data.return_text; })
-        .style("fill-opacity", 1);
-
         // Enter the links.
         link.insert("path", "g")
         .attr("class", "link")
-        .attr("d", diagonal)
+        .attr("d", diagonal);
     }
     </script>
 </body>
