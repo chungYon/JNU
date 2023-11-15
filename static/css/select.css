@@ -5,3 +5,9 @@ body{
 h1{
     font-family: 'GmarketSansMedium';
 }
+h2{
+    font-family: 'GmarketSansMedium';
+}
+textarea {
+    font-size: 3em;
+  }
