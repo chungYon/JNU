@@ -42,7 +42,10 @@ def recursion1():
     n_value = request.args.get('n', type=int)
     print("Received input_value:", n_value)
     
-    return render_template('recursion1.html')
+    fibonacci.links.clear()
+    fibonacci.fibo(n_value)
+    
+    return render_template('index.html', links=fibonacci.links)
 
 @app.route('/select/recursion2',  methods=['GET', 'POST'])
 def recursion2():
