@@ -39,25 +39,24 @@ def select():
 
 @app.route('/select/recursion1', methods=['GET', 'POST'])
 def recursion1():
-    input_value = request.form.get('n')
-    print(str(input_value))
-    fibonacci.fibo(input_value)
-    print("Received input_value:", fibonacci.links)
-    return render_template('index.html', links=fibonacci.links)
+    n_value = request.args.get('n', type=int)
+    print("Received input_value:", n_value)
+    
+    return render_template('recursion1.html')
 
 @app.route('/select/recursion2',  methods=['GET', 'POST'])
 def recursion2():
-    input_value = request.form.get('n')
-    print("Received input_value:", input_value)
-    return render_template('recursion2.html', input_value=input_value)
+    n_value = request.args.get('n', type=int)
+    print("Received input_value:", n_value)
+    return render_template('recursion2.html')
 
     
 
 @app.route('/select/recursion3',  methods=['GET', 'POST'])
 def recursion3():
-    input_value = request.form.get('n')
-    print("Received input_value:", input_value)
-    return render_template('recursion3.html', input_value=input_value)
+    n_value = request.args.get('n', type=int)
+    print("Received input_value:", n_value)
+    return render_template('recursion3.html')
 
 @app.route('/howtouse')
 def explain():
