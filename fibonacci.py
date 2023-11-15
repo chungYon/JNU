@@ -34,7 +34,3 @@ def fibo(n):
 
         stack.pop()
         return result1 + result2
-
-fibo(5)
-for i in links:
-    print(i)

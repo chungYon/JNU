@@ -18,7 +18,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template("index.html", links=fibonacci.links)
+    return "this is empty homepage"
 
 @app.route('/main1')
 def main1():
@@ -40,8 +40,10 @@ def select():
 @app.route('/select/recursion1', methods=['GET', 'POST'])
 def recursion1():
     input_value = request.form.get('n')
-    print("Received input_value:", input_value)
-    return render_template('recursion1.html', input_value=input_value)
+    print(str(input_value))
+    fibonacci.fibo(input_value)
+    print("Received input_value:", fibonacci.links)
+    return render_template('index.html', links=fibonacci.links)
 
 @app.route('/select/recursion2',  methods=['GET', 'POST'])
 def recursion2():
