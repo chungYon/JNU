@@ -30,6 +30,11 @@
         .item {
             flex: 1;
         }
+        .class2 {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end; /* 우측 정렬을 위한 스타일 추가 */
+        }
 
         .textBox {
             position: absolute;
@@ -120,6 +125,7 @@
         }
         function htmlmove(){
             var textareaValue = document.querySelector('.input-text').value;
+            var textareaValue2 = document.querySelector('.input-text2').value;
              if (move == 1){
                 window.location.href = '/select/recursion' + move + '?n=' + textareaValue;
             }
@@ -127,7 +133,7 @@
                 window.location.href = '/select/recursion' + move + '?n=' + textareaValue;
             }
             else if (move == 3){
-                window.location.href = '/select/recursion' + move + '?n=' + textareaValue;
+                window.location.href = '/select/recursion' + move + '?n=' + textareaValue + '?t=' + textareaValue2;
             }
             
         }
@@ -173,17 +179,22 @@
                    <h2>
                     <input type="text" placeholder="n" name='n' class="input-text"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"maxlength = "2" style="width:150px;height:50px;font-size:30px";></input>
                     <div>
-                        <input type="text" placeholder="input" name='n' class="input-text"  id='input1' style="width:150px;height:50px;font-size:30px;display:none;";></input>
+                        <input type="text" placeholder="goal" name='n' class="input-text2"  id='input1' style="width:150px;height:50px;font-size:30px;display:none;";></input>
                          </div>
                     
-                    <input type="submit" value="submit" class="submitButton" onclick="htmlmove()">
+                    <input type="submit" value="submit" class="submitButton" onclick="htmlmove()" >
                    </h2>
                 </div>
             </font>
         </div>
         <div class="item">
+            <div class="class2">
+            <button type="button" class="bt1" onclick=""  >
+                <img src="{{ url_for('static', filename='image/question1.png') }}" width="50%" >
+            </button>
 
         </div>
+    </div>
     </div>
 </body>
 

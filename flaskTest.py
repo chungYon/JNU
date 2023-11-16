@@ -46,8 +46,12 @@ def recursion2():
 
 @app.route('/select/recursion3',  methods=['GET', 'POST'])
 def recursion3():
-    n_value = request.args.get('n', type=int)
+    n_value = request.args.get('n')
+    t = n_value.split("=", 1)
+    n_value = int([t[0].split("?", 1)][0][0])
+    list = t[1].split(",")
     print("Received input_value:", n_value)
+    print("Received list:", list)
     return render_template('recursion3.html')
 
 @app.route('/howtouse')
