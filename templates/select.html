@@ -48,6 +48,12 @@
             max-height: 300px;
             overflow: auto; 
         }
+        .class2 {
+            flex: 1;
+            display: flex;
+            flex-direction: column; /* 열 방향으로 배치 */
+            align-items: flex-end; /* 우측 정렬을 위한 스타일 추가 */
+        }
 
         textarea {
             width: 100%; /* 전체 너비 사용 */
@@ -83,10 +89,24 @@
     </style>
     <script>
         var move = 0;        
+        var hide = 0;
+        function updatehelp(){
+            const image1 = document.getElementById('help_image');
+            
+            if(hide == 0){
+                hide = 1
+                image1.style.display = 'block';
+            }
+            else{
+                hide = 0
+                image1.style.display = 'none';
+            }
+        }
     
         function updateText(buttonNumber) {
             var displayText = "";
             const btn1 = document.getElementById('input1');
+            const nInput = document.getElementById('ninput');
             if(buttonNumber !== 3)
             {
                 btn1.style.display = 'none';
@@ -94,33 +114,60 @@
 
             if (buttonNumber === 1) {
                 move = 1;
+                nInput.value = '';
+                document.getElementById("helpimage").src = "{{ url_for('static', filename='image/help1.png') }}";
                 displayText = "def JNU1(n):<br>&nbsp&nbsp&nbsp" +
                     " if n == 0:<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp return 0<br>" +
                     "&nbsp&nbsp&nbsp elif n == 1 or n == 2:<br>" +
                     "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp return 1<br>" +
                     "&nbsp&nbsp&nbsp else:<br>" +
                     "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp return JNU1(n - 1) + JNU1(n - 2)";
+                    nInput.maxLength = 2;
             } else if (buttonNumber === 2) {
                 move = 2;
+                nInput.value = '';
+                document.getElementById("helpimage").src = "{{ url_for('static', filename='image/help2.png') }}";
+              
                 displayText = "def JNU2(n):<br>&nbsp&nbsp&nbsp" +
                     " if n <= 1:<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp return 1<br>" +
                     "&nbsp&nbsp&nbsp return n * JNU2(n-1)";
+                    nInput.maxLength = 2;
             } else if (buttonNumber === 3) {
                 move = 3;
-                displayText ="def JNU3(n, goal, start=0, end=None):<br>"+
-                "&nbsp&nbsp&nbsp&nbspif end==None:<br>&nbsp&nbsp&nbspend = len(goal) - 1"+
+                nInput.value = '';
+                document.getElementById("helpimage").src = "{{ url_for('static', filename='image/help3.png') }}";
+                nInput.maxLength = 2;
+                displayText ="def JNU3(n, list, start=0, end=None):<br>"+
+                "&nbsp&nbsp&nbsp&nbspif end==None:<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspend = len(list) - 1"+
                 "<br>&nbsp&nbsp&nbsp&nbspif start > end:"+
                 "<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspreturn None"+
                 "<br>&nbsp&nbsp&nbsp&nbspmid = (start + end) // 2"+
-                "<br>&nbsp&nbsp&nbsp&nbspif goal[mid] == n:<br>"+
+                "<br>&nbsp&nbsp&nbsp&nbspif list[mid] == n:<br>"+
                 "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspreturn mid<br>"+
-                "&nbsp&nbsp&nbsp&nbspif n < goal[mid]:<br>"+
-                "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspreturn JNU3(n, goal, start, mid-1)<br>"+
+                "&nbsp&nbsp&nbsp&nbspif n < list[mid]:<br>"+
+                "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspreturn JNU3(n, list, start, mid-1)<br>"+
                 "&nbsp&nbsp&nbsp&nbspelse:<br>"+
-                "&nbsp&nbsp&nbsp&nbspreturn JNU3(n, goal, mid + 1, end)" ;
+                "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspreturn JNU3(n, list, mid + 1, end)" ;
     
                 btn1.style.display = 'block';
+            } else if (buttonNumber == 4) {
+                move = 4;
+                nInput.value = '';
+                nInput.maxLength = 1;
+                document.getElementById("helpimage").src = "{{ url_for('static', filename='image/help2.png') }}";
+                displayText = "def JNU4(n, start, goal, rest):<br>"+
+                "&nbsp&nbsp&nbsp&nbspif (n >= 3):<br>"+
+                "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspJNU4(n - 1, current, rest, goal)<br>"+
+                "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprint(current, goal, sep=\" \")<br>"+
+                "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspJNU4(n - 1, rest, goal, current)<br>"+
+                "&nbsp&nbsp&nbsp&nbspelse if(n==2):<br>"+
+                "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprint(current, rest, sep=\" \")<br>"+
+                "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprint(current, goal, sep=\" \")<br>"+
+                "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprint(rest, goal, sep=\" \")<br>"+
+                "&nbsp&nbsp&nbsp&nbspelse:<br>"+
+                "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprint(current, goal, sep=\" \")";
             }
+            
             document.getElementById("displayText").innerHTML = displayText;
         }
         function htmlmove(){
@@ -134,6 +181,9 @@
             }
             else if (move == 3){
                 window.location.href = '/select/recursion' + move + '?n=' + textareaValue + '?t=' + textareaValue2;
+            }
+            else if (move == 4){
+                window.location.href = '/select/recursion' + move + '?n=' + textareaValue;
             }
             
         }
@@ -168,6 +218,9 @@
             <button type="button" class="bt1" onclick="updateText(3)">
                 <img src="{{ url_for('static', filename='image/button3.png') }}" width="425px" height="127px">
             </button>
+            <button type="button" class="bt1" onclick="updateText(4)">
+                <img src="{{ url_for('static', filename='image/button4.png') }}" width="425px" height="127px">
+            </button>
         </div>
 
         <div class="item">
@@ -177,9 +230,9 @@
                 </div> 
                 <div class="input-container">
                    <h2>
-                    <input type="text" placeholder="n" name='n' class="input-text"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"maxlength = "2" style="width:150px;height:50px;font-size:30px";></input>
+                    <input id="ninput" type="text" placeholder="n" name='n' class="input-text"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"maxlength = "2" style="width:150px;height:50px;font-size:30px";></input>
                     <div>
-                        <input type="text" placeholder="goal" name='n' class="input-text2"  id='input1' style="width:150px;height:50px;font-size:30px;display:none;";></input>
+                        <input type="text" placeholder="list" name='n' class="input-text2"  id='input1' style="width:150px;height:50px;font-size:30px;display:none;";></input>
                          </div>
                     
                     <input type="submit" value="submit" class="submitButton" onclick="htmlmove()" >
@@ -189,11 +242,15 @@
         </div>
         <div class="item">
             <div class="class2">
-            <button type="button" class="bt1" onclick=""  >
-                <img src="{{ url_for('static', filename='image/question1.png') }}" width="50%" >
-            </button>
-
-        </div>
+                <div class="button-container">
+                    <button type="button" class="bt1" onclick="updatehelp()">
+                        <img src="{{ url_for('static', filename='image/question1.png') }}" width="35%" height="35%" />
+                    </button>
+                </div>
+                <div id="help_image" style="display:none">
+                    <img id="helpimage" src=""/>
+                </div>
+            </div>
     </div>
     </div>
 </body>

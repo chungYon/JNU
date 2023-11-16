@@ -54,6 +54,12 @@ def recursion3():
     print("Received list:", list)
     return render_template('recursion3.html')
 
+@app.route('/select/recursion4',  methods=['GET', 'POST'])
+def recursion4():
+    n_value = request.args.get('n', type=int)
+    print("Received input_value:", n_value)
+    return render_template('recursion3.html')
+
 @app.route('/howtouse')
 def explain():
     return "this is to introduce how to use this site"
