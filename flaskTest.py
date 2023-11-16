@@ -50,6 +50,12 @@ def recursion3():
     t = n_value.split("=", 1)
     n_value = int([t[0].split("?", 1)][0][0])
     list = t[1].split(",")
+    if (list[0] == ''):
+        del list[0]
+    if(list[-1] == ''):
+        del list[-1]
+    for a in range(len(list)):
+        list[a] = int(list[a])
     print("Received input_value:", n_value)
     print("Received list:", list)
     return render_template('recursion3.html')
