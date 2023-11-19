@@ -56,6 +56,11 @@ def recursion3():
         del list[-1]
     for a in range(len(list)):
         list[a] = int(list[a])
+    list_copy = list[:]
+    for i in list_copy:
+        if (list.count(i) > 1):
+            list.remove(i)
+    list.sort()
     print("Received input_value:", n_value)
     print("Received list:", list)
     return render_template('recursion3.html')
