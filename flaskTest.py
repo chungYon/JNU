@@ -52,15 +52,15 @@ def recursion3():
     list_ = t[1].split(",")
     if (list_[0] == ''):
         del list[0]
-    if(list[-1] == ''):
+    if(list_[-1] == ''):
         del list[-1]
-    for a in range(len(list)):
-        list[a] = int(list[a])
-    list_copy = list[:]
+    for a in range(len(list_)):
+        list_[a] = int(list_[a])
+    list_copy = list_[:]
     for i in list_copy:
-        if (list.count(i) > 1):
-            list.remove(i)
-    list.sort()
+        if (list_.count(i) > 1):
+            list_.remove(i)
+    list_.sort()
     print("Received input_value:", n_value)
     print("Received list:", list_)
     binarySearch.dic_list.clear()
