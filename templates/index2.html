@@ -96,19 +96,18 @@
     .on('zoom', zoomed);
     
     svg_select.call(zoom);
-    
+
     root = links_hi;
-    
+
     update(root)
     
-
     function update(source) {
         
         // Compute the new tree layout.
         var nodes = tree.nodes(root).reverse();
         var links = tree.links(nodes);
 
-        console.log(nodes);
+        console.log(links);
 
         // Normalize for fixed-depth.
         nodes.forEach(function(d) { d.y = d.depth * 180 + margin.top; });
@@ -128,12 +127,23 @@
 
         nodeEnter.append("text")
         .attr("dy", "-1em")
-        .attr("text-anchor", "end")
-        .text(function(d) { return "n : " + d.data.value; })
+        .attr("text-anchor", "middle")
+        .text(function(d) { return "start : " + d.data.start_index; })
+        .style("fill-opacity", 1);
+
+        nodeEnter.append("text")
+        .attr("text-anchor", "middle")
+        .text(function(d) { return "mid : " + d.data.mid; })
         .style("fill-opacity", 1);
 
         nodeEnter.append("text")
         .attr("dy", "1em")
+        .attr("text-anchor", "middle")
+        .text(function(d) { return "end : " + d.data.end_index; })
+        .style("fill-opacity", 1);
+
+        nodeEnter.append("text")
+        .attr("dy", "2em")
         .attr("text-anchor", "middle")
         .text(function(d) { return d.data.return_text; })
         .style("fill-opacity", 1);

@@ -2,6 +2,7 @@ import sys
 import subprocess
 import fibonacci
 import factorial
+import binarySearch
 
 
 try:
@@ -39,7 +40,6 @@ def recursion1():
 @app.route('/select/recursion2',  methods=['GET', 'POST'])
 def recursion2():
     n_value = request.args.get('n', type=int)
-    
     factorial.links.clear()
     factorial.factorial(n_value)
     return render_template('index.html', links=factorial.links)
@@ -49,16 +49,20 @@ def recursion3():
     n_value = request.args.get('n')
     t = n_value.split("=", 1)
     n_value = int([t[0].split("?", 1)][0][0])
-    list = t[1].split(",")
-    if (list[0] == ''):
+    list_ = t[1].split(",")
+    if (list_[0] == ''):
         del list[0]
-    if(list[-1] == ''):
-        del list[-1]
-    for a in range(len(list)):
-        list[a] = int(list[a])
+    if(list_[-1] == ''):
+        del list_[-1]
+    for a in range(len(list_)):
+        list_[a] = int(list_[a])
     print("Received input_value:", n_value)
-    print("Received list:", list)
-    return render_template('recursion3.html')
+    print("Received list:", list_)
+    binarySearch.dic_list.clear()
+    binarySearch.binary_search(n_value, list_)
+    print(binarySearch.dic_list)
+    binarySearch.dic_list[0]["source"] = ""
+    return render_template('index2.html', links=binarySearch.dic_list)
 
 @app.route('/select/recursion4',  methods=['GET', 'POST'])
 def recursion4():
