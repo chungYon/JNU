@@ -1,1 +1,1 @@
-You can join this site => https://chungyonta.pythonanywhere.com/main
+You can join this site => https://chungyonta.pythonanywhere.com/

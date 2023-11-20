@@ -3,6 +3,7 @@ import subprocess
 import fibonacci
 import factorial
 import binarySearch
+import hanoi
 
 
 try:
@@ -73,7 +74,9 @@ def recursion3():
 def recursion4():
     n_value = request.args.get('n', type=int)
     print("Received input_value:", n_value)
-    return render_template('recursion3.html')
+    hanoi.links.clear()
+    hanoi.hanoi(n_value, "A", "B", "C")
+    return render_template('index3.html', links=hanoi.links)
 
 @app.route('/howtouse')
 def explain():
