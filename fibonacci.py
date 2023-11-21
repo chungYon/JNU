@@ -10,7 +10,6 @@ def fibo(n):
     stack.append(id)
 
     if(len(stack) > 1):
-        print("{}->{}".format(stack[-2], stack[-1]))
         links.append({"source" : stack[-2], "target" : stack[-1], "type" : "call", "value" : n})
     else:
         links.append({"source" : "", "target" : stack[-1], "type" : "call", "value" : n})

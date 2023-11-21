@@ -6,12 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>재귀함수 트리 결과</title>
     <style>
-        
 
         .link {
             fill: none;
-            stroke: #666;
-            stroke-width: 1.5px;
+            stroke: rgb(145, 145, 145);
+            stroke-width: 3px;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            background-image: url('{{ url_for('static', filename='image/main_background.png') }}');
+            background-size: cover;
         }
         
         .node circle {
@@ -44,13 +51,29 @@
         #container{
             margin: 0 auto;
             display: flex;
+            background-size: contain;
             justify-content: center
+        }
+
+        #container svg{
+            margin-top: 1%; 
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        #backspace{
+            position: absolute;
+            right: 5%;
+            top: 5%;
+            border: none;
+            background-color: rgba(0, 0, 0, 0);
         }
     </style>
 </head>
 <body>
     <div id="container">
-
+        <button id="backspace" onclick="history.back()">
+            <img src="{{ url_for('static', filename='image/backspace.png') }}" width="70%" height="70%" alt="뒤로 가기">
+        </button>
     </div>
     <script type="text/javascript" src="{{ url_for('static', filename='node_modules/d3/d3.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='node_modules/d3-hierarchy/dist/d3-hierarchy.js') }}"></script>
@@ -67,6 +90,9 @@
     var width = window.innerWidth - margin.right - margin.left;
     var height = window.innerHeight - margin.top - margin.bottom;
     
+    document.getElementById('container').setAttribute('width', width);
+    document.getElementById('container').setAttribute('height', height);
+
     var i = 0;
 
     var tree = d3.layout.tree()

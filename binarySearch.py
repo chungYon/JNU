@@ -30,5 +30,5 @@ def binary_search(element, some_list, start_index=0, end_index=None, count=0):
 
     for i, link in enumerate(dic_list):
             if link["target"] == count:
-                dic_list[i]["return_text"] = "found_index is : {}".format(found_index)
+                dic_list[i]["return_text"] = "target index is : {}".format(found_index)
 
