@@ -167,6 +167,15 @@
                 "&nbsp&nbsp&nbsp&nbspelse:<br>"+
                 "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprint(current, goal, sep=\" \")";
             }
+            else if (buttonNumber == 4) {
+                move = 5;
+                nInput.value = '';
+                nInput.maxLength = 3;
+                document.getElementById("helpimage").src = "{{ url_for('static', filename='image/help5.png') }}";
+                displayText = "1로 만들어~";
+            }
+            
+            document.getElementById("displayText").innerHTML = displayText;
             
             document.getElementById("displayText").innerHTML = displayText;
         }
@@ -189,6 +198,9 @@
                 window.location.href = '/select/recursion' + move + '?n=' + textareaValue + '?t=' + textareaValue2;
             }
             else if (move == 4){
+                window.location.href = '/select/recursion' + move + '?n=' + textareaValue;
+            }
+            else if (move == 5){
                 window.location.href = '/select/recursion' + move + '?n=' + textareaValue;
             }
             
@@ -231,6 +243,9 @@
             </button>
             <button type="button" class="bt1" onclick="updateText(4)">
                 <img src="{{ url_for('static', filename='image/button4.png') }}" width="425px" height="127px">
+            </button>
+            <button type="button" class="bt1" onclick="updateText(5)">
+                <img src="{{ url_for('static', filename='image/button5.png') }}" width="425px" height="127px">
             </button>
         </div>
 
