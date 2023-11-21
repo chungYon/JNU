@@ -11,49 +11,46 @@
             stroke: #666;
             stroke-width: 1.5px;
         }
-
-        /* #licensing {
-            fill: green;
-        }
-
-        .link.call {
-            stroke: green;
-        }
-
-        .link.return {
-            stroke-dasharray: 0,2 1;
-        } */
-
+        
         .node circle {
             fill: #ccc;
             stroke: #333;
             stroke-width: 1.5px;
         }
-
+        
         .node circle {
             fill: #ccc;
             stroke: #333;
             stroke-width: 1.5px;
             
         }
-
+        
         .node text {
             position: absolute;
             font: 10px sans-serif;
             pointer-events: none;
             text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
         }
-
+        
         .link_text {
             position: absolute;
             font: 10px sans-serif;
             pointer-events: none;
             text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
         }
+        
+        #container{
+            margin: 0 auto;
+            display: flex;
+            justify-content: center
+        }
 
     </style>
 </head>
 <body>
+    <div id="container">
+
+    </div>
     <script type="text/javascript" src="{{ url_for('static', filename='node_modules/d3/d3.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='node_modules/d3-hierarchy/dist/d3-hierarchy.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='node_modules/d3-zoom/dist/d3-zoom.js') }}"></script>

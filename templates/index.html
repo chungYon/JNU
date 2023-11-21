@@ -13,49 +13,45 @@
             stroke: #666;
             stroke-width: 1.5px;
         }
-
-        /* #licensing {
-            fill: green;
-        }
-
-        .link.call {
-            stroke: green;
-        }
-
-        .link.return {
-            stroke-dasharray: 0,2 1;
-        } */
-
+        
         .node circle {
             fill: #ccc;
             stroke: #333;
             stroke-width: 1.5px;
         }
-
+        
         .node circle {
             fill: #ccc;
             stroke: #333;
             stroke-width: 1.5px;
             
         }
-
+        
         .node text {
             position: absolute;
             font: 10px sans-serif;
             pointer-events: none;
             text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
         }
-
+        
         .link_text {
             position: absolute;
             font: 10px sans-serif;
             pointer-events: none;
             text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
         }
-
+        
+        #container{
+            margin: 0 auto;
+            display: flex;
+            justify-content: center
+        }
     </style>
 </head>
 <body>
+    <div id="container">
+
+    </div>
     <script type="text/javascript" src="{{ url_for('static', filename='node_modules/d3/d3.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='node_modules/d3-hierarchy/dist/d3-hierarchy.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='node_modules/d3-zoom/dist/d3-zoom.js') }}"></script>
@@ -79,18 +75,18 @@
     var diagonal = d3.svg.diagonal()
         .projection(function(d) { return [d.x, d.y]; });
 
-    var svg = d3.select("body").append("svg")
+    var svg = d3.select("body").select("div").append("svg")
         .attr("width", width)
         .attr("height", height)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var svg_select = d3.select("body").select("svg");
+    var svg_select = d3.select("body").select("div").select("svg");
 
     function zoomed() {
         var scale = d3.event.scale,
             translation = d3.event.translate;
-        
+
         svg_select.select('g').attr("transform", "translate(" + translation + ")" +" scale(" + scale + ")");
     }   
     
