@@ -1,1 +1,2 @@
-You can join this site => https://chungyonta.pythonanywhere.com/
+# JNU (재귀함수 너무 어려워!!)
+----------
