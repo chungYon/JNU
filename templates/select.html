@@ -173,7 +173,19 @@
                 nInput.value = '';
                 nInput.maxLength = 3;
                 document.getElementById("helpimage").src = "{{ url_for('static', filename='image/help6.png') }}";
-                displayText = "1로 만들어~";
+                displayText = "dp={1:0}<br>"+
+                "def JNU5(n):<br>"+
+                "&nbsp&nbsp&nbsp&nbspif n in dp.keys():<br>"+
+                "&nbsp&nbsp&nbsp&nbspreturn dp[n]<br>"+
+                "&nbsp&nbsp&nbsp&nbspif (n%3==0) and (n%2==0):<br>"+
+                "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspdp[n]=min(JNU5(n//3)+1, JNU5(n//2)+1)<br>"+
+                "&nbsp&nbsp&nbsp&nbspelif (n%3==0):<br>"+
+                "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspdp[n]=min(JNU5(n//3)+1, JNU5(n-1)+1)<br>"+
+                "&nbsp&nbsp&nbsp&nbspelif (n%2==0):<br>"+
+                "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspdp[n]=min(JNU5(n//2)+1, JNU5(n-1)+1)<br>"+
+                "&nbsp&nbsp&nbsp&nbspelse:<br>"+
+                "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspdp[n]=JNU5(n-1)+1<br>"+
+                "&nbsp&nbsp&nbsp&nbspreturn dp[n]<br>";
             }
             
             document.getElementById("displayText").innerHTML = displayText;
