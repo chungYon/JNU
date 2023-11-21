@@ -4,15 +4,15 @@ def binary_search(element, some_list, start_index=0, end_index=None, count=0):
         end_index = len(some_list) - 1
     
     if (start_index > end_index):
-        finded_index = None
+        found_index = None
         return None
     
     mid = (start_index + end_index) // 2
 
     if (element in some_list):
-        finded_index = some_list.index(element)
+        found_index = some_list.index(element)
     else:
-        finded_index = None
+        found_index = None
 
     if (element < some_list[mid]):
         info_dic = {"source" : count, "target" : count+1, "start_index" : start_index, "end_index" : end_index, "mid" : mid, "type" : "call"}
@@ -30,5 +30,5 @@ def binary_search(element, some_list, start_index=0, end_index=None, count=0):
 
     for i, link in enumerate(dic_list):
             if link["target"] == count:
-                dic_list[i]["return_text"] = "finded index is : {}".format(finded_index)
+                dic_list[i]["return_text"] = "found_index is : {}".format(found_index)
 
