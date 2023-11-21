@@ -154,7 +154,7 @@
                 move = 4;
                 nInput.value = '';
                 nInput.maxLength = 1;
-                document.getElementById("helpimage").src = "{{ url_for('static', filename='image/help2.png') }}";
+                document.getElementById("helpimage").src = "{{ url_for('static', filename='image/help5.png') }}";
                 displayText = "def JNU4(n, start, goal, rest):<br>"+
                 "&nbsp&nbsp&nbsp&nbspif (n >= 3):<br>"+
                 "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspJNU4(n - 1, current, rest, goal)<br>"+
@@ -243,7 +243,7 @@
                    <h2>
                     <input id="ninput" type="text" placeholder="n" name='n' class="input-text"  oninput="this.value=this.value.replace(/[^0-9]/g,'');"maxlength = "2" style="width:150px;height:50px;font-size:30px";></input>
                     <div>
-                        <input type="text" placeholder="list" name='n' class="input-text2"  id='input1' oninput="formatInput(this);" style="width:300px;height:50px;font-size:30px;display:none;">
+                        <input type="text" placeholder="list" name='n' class="input-text2"  id='input1' oninput="formatInput(this);" style="width:500px;height:50px;font-size:30px;display:none;">
                     </div>
                     
                     <input type="submit" value="submit" class="submitButton" onclick="htmlmove()" >
