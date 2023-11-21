@@ -4,6 +4,7 @@ import fibonacci
 import factorial
 import binarySearch
 import hanoi
+import makeOne
 
 try:
     # 없는 모듈 import시 에러 발생
@@ -76,6 +77,14 @@ def recursion4():
     hanoi.links.clear()
     hanoi.hanoi(n_value, "A", "B", "C")
     return render_template('index3.html', links=hanoi.links)
+
+@app.route('/select/recursion5',  methods=['GET', 'POST'])
+def recursion5():
+    n_value = request.args.get('n', type=int)
+    print("Received input_value:", n_value)
+    makeOne.links.clear()
+    makeOne.JNU5(n_value)
+    return render_template('index4.html', links=makeOne.links)
 
 @app.route('/howtouse')
 def explain():
