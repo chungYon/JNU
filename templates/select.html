@@ -2,6 +2,7 @@
 <html lang="ko">
 
 <head>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='image/jnufavi.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/select.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -154,7 +155,7 @@
                 move = 4;
                 nInput.value = '';
                 nInput.maxLength = 1;
-                document.getElementById("helpimage").src = "{{ url_for('static', filename='image/help2.png') }}";
+                document.getElementById("helpimage").src = "{{ url_for('static', filename='image/help5.png') }}";
                 displayText = "def JNU4(n, start, goal, rest):<br>"+
                 "&nbsp&nbsp&nbsp&nbspif (n >= 3):<br>"+
                 "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspJNU4(n - 1, current, rest, goal)<br>"+
@@ -167,6 +168,15 @@
                 "&nbsp&nbsp&nbsp&nbspelse:<br>"+
                 "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprint(current, goal, sep=\" \")";
             }
+            else if (buttonNumber == 4) {
+                move = 5;
+                nInput.value = '';
+                nInput.maxLength = 3;
+                document.getElementById("helpimage").src = "{{ url_for('static', filename='image/help5.png') }}";
+                displayText = "1로 만들어~";
+            }
+            
+            document.getElementById("displayText").innerHTML = displayText;
             
             document.getElementById("displayText").innerHTML = displayText;
         }
@@ -189,6 +199,9 @@
                 window.location.href = '/select/recursion' + move + '?n=' + textareaValue + '?t=' + textareaValue2;
             }
             else if (move == 4){
+                window.location.href = '/select/recursion' + move + '?n=' + textareaValue;
+            }
+            else if (move == 5){
                 window.location.href = '/select/recursion' + move + '?n=' + textareaValue;
             }
             
@@ -232,6 +245,9 @@
             <button type="button" class="bt1" onclick="updateText(4)">
                 <img src="{{ url_for('static', filename='image/button4.png') }}" width="425px" height="127px">
             </button>
+            <button type="button" class="bt1" onclick="updateText(5)">
+                <img src="{{ url_for('static', filename='image/button5.png') }}" width="425px" height="127px">
+            </button>
         </div>
 
         <div class="item">
@@ -243,7 +259,7 @@
                    <h2>
                     <input id="ninput" type="text" placeholder="n" name='n' class="input-text"  oninput="this.value=this.value.replace(/[^0-9]/g,'');"maxlength = "2" style="width:150px;height:50px;font-size:30px";></input>
                     <div>
-                        <input type="text" placeholder="list" name='n' class="input-text2"  id='input1' oninput="formatInput(this);" style="width:300px;height:50px;font-size:30px;display:none;">
+                        <input type="text" placeholder="list" name='n' class="input-text2"  id='input1' oninput="formatInput(this);" style="width:500px;height:50px;font-size:30px;display:none;">
                     </div>
                     
                     <input type="submit" value="submit" class="submitButton" onclick="htmlmove()" >
